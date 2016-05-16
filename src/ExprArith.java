@@ -34,6 +34,19 @@ class Inv extends ExprArith {
 
 }//Inv
 
+class Bool extends ExprArith {
+    
+    Boolean b;
+    
+    Inv(Boolean b){
+        this.b = b;
+    }
+    
+    int eval(){
+        return (b ? 1 : 0); //Ternary operator if b is true return 1 else 0
+    }
+}
+
 abstract class BinOp extends ExprArith {
 
     ExprArith e1, e2;
