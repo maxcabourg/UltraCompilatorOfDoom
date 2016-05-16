@@ -38,7 +38,7 @@ class Bool extends ExprArith {
     
     Boolean b;
     
-    Inv(Boolean b){
+    Bool(Boolean b){
         this.b = b;
     }
     
@@ -47,6 +47,20 @@ class Bool extends ExprArith {
     }
 }
 
+class ArrayOf extends ExprArith {
+    
+    ExprArith[] array;
+    
+    ArrayOf(ExprArith[] array){
+        this.array = array;
+    }
+    
+    int eval(){ //Ca veut dire quoi évaluer un tableau ?
+        return array;
+    }
+}
+
+/*****************************BINARY OPERATORS***********************************/
 abstract class BinOp extends ExprArith {
 
     ExprArith e1, e2;
@@ -105,7 +119,11 @@ class Div extends BinOp {
 
 }//Div
 
-class GreaterThan extends BinOp {
+/********************COMPARATORS******************************************/
+class Comparator extends BinOp{
+    
+}
+class GreaterThan extends Comparator {
     
     GreaterThan(ExprArith e1, ExprArith e2) {
         this.e1 = e1;
@@ -117,7 +135,7 @@ class GreaterThan extends BinOp {
     }
 }
 
-class GreaterThanOrEqual extends BinOp {
+class GreaterThanOrEqual extends Comparator {
     
     GreaterThanOrEqual(ExprArith e1, ExprArith e2) {
         this.e1 = e1;
@@ -129,7 +147,7 @@ class GreaterThanOrEqual extends BinOp {
     }
 }
 
-class Equal extends BinOp {
+class Equal extends Comparator {
     
     Equal(ExprArith e1, ExprArith e2) {
         this.e1 = e1;
@@ -141,7 +159,7 @@ class Equal extends BinOp {
     }
 }
 
-class Different extends BinOp {
+class Different extends Comparator {
     
     Different(ExprArith e1, ExprArith e2) {
         this.e1 = e1;
@@ -153,7 +171,7 @@ class Different extends BinOp {
     }
 }
 
-class LessOrEqual extends BinOp {
+class LessOrEqual extends Comparator {
     
     LessOrEqual(ExprArith e1, ExprArith e2) {
         this.e1 = e1;
@@ -165,7 +183,7 @@ class LessOrEqual extends BinOp {
     }
 }
 
-class LessThan extends BinOp {
+class LessThan extends Comparator {
     
     LessThan(ExprArith e1, ExprArith e2) {
         this.e1 = e1;
@@ -175,4 +193,50 @@ class LessThan extends BinOp {
     int eval () {
         return (e1.eval() < e2.eval() ? 1 : 0); //returns 1 if true false otherwise
     }
+}
+
+/*********************CALL TARGETS****************************/
+abstract class CallTarget extends ExprArith {
+    
+}
+
+class Read extends CallTarget{
+    
+}
+
+class Write extends CallTarget(){
+    
+}
+/*******************EXPRESSION*******************************/
+abstract class Instruction extends ExprArith{
+    
+}
+
+class Affectation extends Instruction{
+    
+}
+
+class IfThenElse extends Instruction{
+    
+    Comparator condition;
+    ExprArith[] ifInstructions;
+    ExprArith[] elseInstructions;
+    
+    IfThenElse(Comparator condition, ExprArith[] ifInstructions, ExprArith[] elseInstructions){
+        this.condition = condition;
+        this.ifInstructions = ifInstructions;
+        this.elseInstructions = elseInstructions;
+    }
+}
+
+class WhileDo extends Instruction{
+    
+    Comparator stopCondition;
+    ExprArith[] instructions;
+    
+    WhileDo(Comparator stopCondition, ExprArith[] instructions){
+        this.stopCondition = stopCondition;
+        this.instructions = instructions;
+    }
+    
 }
