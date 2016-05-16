@@ -25,7 +25,7 @@ class Inv extends ExprArith {
     ExprArith e;
 
     Inv (ExprArith e) {
-        this.e = e;
+        this.e = e; 
     }//Inv
 
     int eval () {
@@ -36,7 +36,7 @@ class Inv extends ExprArith {
 
 class Bool extends ExprArith {
     
-    Boolean b;
+    Boolean b = false; //Par défaut
     
     Bool(Boolean b){
         this.b = b;
@@ -49,7 +49,7 @@ class Bool extends ExprArith {
 
 class ArrayOf extends ExprArith {
     
-    ExprArith[] array;
+    ExprArith[] array = null; //Par défaut
     
     ArrayOf(ExprArith[] array){
         this.array = array;
