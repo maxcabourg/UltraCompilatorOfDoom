@@ -14,7 +14,7 @@ multiplyExpr : atomExpr('*' atomExpr | '/' atomExpr)* ;
 logicalExpr : comparingExpr('and' comparingExpr | 'or' comparingExpr)*;
 
 //On veut comparer au moins 2 expression atomiques donc pas de * a la fin
-comparingExpr : atomExpr ('<' atomExpr | '<=' atomExpr |'=' atomExpr | '!=' atomExpr | '>' atomExpr | '>=' atomExpr)
+comparingExpr : atomExpr ('<' atomExpr | '<=' atomExpr |'=' atomExpr | '!=' atomExpr | '>' atomExpr | '>=' atomExpr);
 
 /* An expression atom is the smallest part of an expression: a number. Or 
    when we encounter parenthesis, we're making a recursive call back to the
