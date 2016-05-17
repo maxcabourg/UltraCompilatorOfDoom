@@ -56,7 +56,7 @@ class ArrayOf extends ExprArith {
     }
     
     int eval(){ //Ca veut dire quoi évaluer un tableau ?
-        return array;
+        return ((array.length > 0) ? 1 : 0);
     }
 }
 
@@ -120,7 +120,7 @@ class Div extends BinOp {
 }//Div
 
 /********************COMPARATORS******************************************/
-class Comparator extends BinOp{
+abstract class Comparator extends BinOp{
     
 }
 class GreaterThan extends Comparator {
@@ -203,7 +203,7 @@ class AndComparator extends Comparator {
     }
     
     int eval () {
-        return (e1.eval() && e2.eval() ? 1 : 0); //returns 1 if true false otherwise
+        return (e1.eval() == 1 && e2.eval() == 1 ? 1 : 0); //returns 1 if true false otherwise
     }
 }
 
@@ -215,7 +215,7 @@ class OrComparator extends Comparator {
     }
     
     int eval () {
-        return (e1.eval() || e2.eval() ? 1 : 0); //returns 1 if true false otherwise
+        return (e1.eval() == 1 || e2.eval() == 1 ? 1 : 0); //returns 1 if true false otherwise
     }
 }
 
@@ -227,34 +227,30 @@ abstract class CallTarget extends ExprArith {
 class Read extends CallTarget{
     
     int eval(){
-        return null;
+        return -1;
     }
 }
 
 class Write extends CallTarget{
     
     int eval(){
-        return null;
+        return -1;
     }
 }
     
-}
 /*******************EXPRESSION*******************************/
 abstract class Instruction extends ExprArith{
     
     int eval(){
-        return null;
+        return -1;
     }
-}
 }
 
 class Affectation extends Instruction{
     
     int eval(){
-        return null;
+        return -1;
     }
-}
-    
 }
 
 class IfThenElse extends Instruction{
@@ -270,9 +266,8 @@ class IfThenElse extends Instruction{
     }
     
     int eval(){
-        return null;
+        return -1;
     }
-}
 }
 
 class WhileDo extends Instruction{
@@ -286,8 +281,6 @@ class WhileDo extends Instruction{
     }
     
     int eval(){
-        return null;
+        return -1;
     }
-}
-    
 }
