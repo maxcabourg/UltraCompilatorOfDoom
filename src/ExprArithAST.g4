@@ -8,12 +8,21 @@ grammar ExprArithAST;
 expr : additionExpr;
 
 // Addition and subtraction have the lowest precedence.
-additionExpr : multiplyExpr(PLUS multiplyExpr |MINUS multiplyExpr)* ;
+additionExpr returns [ExprArith value] :
+  e1 = multiplyExpr {$value = $e1.value;}
+  (PLUS e2 = multiplyExpr {$value = new Add($value, $e2.value);}
+  |MINUS e2 = multiplyExpr {$value = new Sub($value, $e2.value);})* ;
 
 // Multiplication and division have a higher precedence.
-multiplyExpr : atomExpr(MUL atomExpr | DIV atomExpr)* ;
+multiplyExpr returns [ExprArith value] :
+  e1 = atomExpr {$value = $e1.value;}
+  (MUL e2 = atomExpr {$value = new Mul($value, $e2.value);}
+  |DIV e2 = atomExpr {$value = new Div($value, $e2.value);})* ;
 
-logicalExpr : comparingExpr(AND comparingExpr |OR comparingExpr)*;
+logicExpr returns [Bool value] :
+  e1 = atomExpr {$value = e1.value;}
+  (AND e2 = atomExpr {$value = new And($value, $e2.value);}
+  |OR e2 = atomExpr {$value = new Or($value, $e2.value);})*;
 
 //On veut comparer au moins 2 expression atomiques donc pas de * a la fin
 comparingExpr returns [Bool value] :
@@ -30,7 +39,10 @@ comparingExpr returns [Bool value] :
    rule 'additionExpr'. As you can see, an 'atomExpr' has the highest
    precedence. */
    //Peut être aussi un booléen
-atomExpr : number | r_boolean | P1 additionExpr P2 | MINUS atomExpr | NOT comparingExpr ;
+atomExpr returns [ExprArith value] :
+  c = number {$value = new Cte(Integer.parseInt($c.text));}
+  | PLEFT e1 = additionExpr PRIGHT {$value = $e1.value;}
+  | MINUS e2 = atomExpr {$value = new Inv($e2.value);} ;
 
 
 fragment DIGIT : ('0'..'9');
@@ -43,9 +55,10 @@ variable : LETTER+;
 //Declaration des différentes instructions
 varDeclaration : VAR (variable) DEUXPOINTS TYPE;
 varAffectation : variable AFFECT (number | r_boolean);
-ifStatement : IF comparingExpr THEN (expr)+ ELSE (expr)+; //j'aimerais que le else n'apparaisse qu'une fois mais je ne sais pas comment faire
+ifStatement : IF comparingExpr THEN (instruction)+ ELSE (instruction)+;
 whileStatement : WHILE comparingExpr DO (expr)+ ; //Considérons que l'on doive faire au moins un truc après le while(d'ou le +)
-
+functionDeclaration: 'f' PLEFT variable DEUXPOINTS TYPE PRIGHT DEUXPOINTS TYPE;
+instruction : (varDeclaration |varAffectation | ifStatement | whileStatement);
 //Symbols
 LT : '<';
 LQ : '<=';
@@ -75,5 +88,9 @@ AFFECT : ':=';
 DEUXPOINTS : ':';
 CROCHETOUVRANT : '[';
 CROCHETFERMANT : ']';
+PLEFT : '(';
+PRIGHT : ')';
+READ : 'read';
+WRITE : 'write';
 // We're going to ignore all white space characters
 WS : [ \t\r\n]+ -> skip ;

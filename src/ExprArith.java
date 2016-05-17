@@ -226,17 +226,34 @@ abstract class CallTarget extends ExprArith {
 
 class Read extends CallTarget{
     
+    int eval(){
+        return null;
+    }
 }
 
-class Write extends CallTarget(){
+class Write extends CallTarget{
+    
+    int eval(){
+        return null;
+    }
+}
     
 }
 /*******************EXPRESSION*******************************/
 abstract class Instruction extends ExprArith{
     
+    int eval(){
+        return null;
+    }
+}
 }
 
 class Affectation extends Instruction{
+    
+    int eval(){
+        return null;
+    }
+}
     
 }
 
@@ -251,6 +268,11 @@ class IfThenElse extends Instruction{
         this.ifInstructions = ifInstructions;
         this.elseInstructions = elseInstructions;
     }
+    
+    int eval(){
+        return null;
+    }
+}
 }
 
 class WhileDo extends Instruction{
@@ -262,5 +284,10 @@ class WhileDo extends Instruction{
         this.stopCondition = stopCondition;
         this.instructions = instructions;
     }
+    
+    int eval(){
+        return null;
+    }
+}
     
 }
