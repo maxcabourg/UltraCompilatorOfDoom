@@ -171,9 +171,9 @@ class Different extends Comparator {
     }
 }
 
-class LessOrEqual extends Comparator {
+class LesserThanOrEqual extends Comparator {
     
-    LessOrEqual(ExprArith e1, ExprArith e2) {
+    LesserThanOrEqual(ExprArith e1, ExprArith e2) {
         this.e1 = e1;
         this.e2 = e2;
     }
@@ -183,15 +183,39 @@ class LessOrEqual extends Comparator {
     }
 }
 
-class LessThan extends Comparator {
+class LesserThan extends Comparator {
     
-    LessThan(ExprArith e1, ExprArith e2) {
+    LesserThan(ExprArith e1, ExprArith e2) {
         this.e1 = e1;
         this.e2 = e2;
     }
     
     int eval () {
         return (e1.eval() < e2.eval() ? 1 : 0); //returns 1 if true false otherwise
+    }
+}
+
+class AndComparator extends Comparator {
+    
+    AndComparator(ExprArith e1, ExprArith e2) {
+        this.e1 = e1;
+        this.e2 = e2;
+    }
+    
+    int eval () {
+        return (e1.eval() && e2.eval() ? 1 : 0); //returns 1 if true false otherwise
+    }
+}
+
+class OrComparator extends Comparator {
+    
+    OrComparator(ExprArith e1, ExprArith e2) {
+        this.e1 = e1;
+        this.e2 = e2;
+    }
+    
+    int eval () {
+        return (e1.eval() || e2.eval() ? 1 : 0); //returns 1 if true false otherwise
     }
 }
 
