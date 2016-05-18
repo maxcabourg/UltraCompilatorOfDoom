@@ -48,13 +48,6 @@ abstract class UPPUnOp extends UPPExpr {
 
 }//UPPUnOp
 
-class UPPInv extends UPPUnOp {
-
-    UPPInv (UPPExpr e) {
-        this.e = e;
-    }//UPPInv
-
-}//UPPInv
 
 class UPPNot extends UPPUnOp {
 
