@@ -69,7 +69,10 @@ class PPVar extends PPExpr {
     }//PPVar
     
     UPPExpr toUPP(ArrayList<String> locals){
-    	return new UPPVar(name);
+    	if(locals.contains(name))
+		    return new UPPVar(name);
+	    else
+		    return new UPPGVar(name);	
     }
 
 }//PPVar
@@ -428,7 +431,7 @@ class PPProcCall extends PPInst {
     
 class PPSkip extends PPInst {
 	UPPSkip toUPP(ArrayList<String> locals){
-		return new UPPkip();
+		return new UPPSkip();
 	}
 }//PPSkip
 
@@ -472,6 +475,8 @@ abstract class PPDef {
     String name;
     ArrayList<Pair<String,Type>> args, locals;
     PPInst code;
+    
+    abstract UPPDef toUPP ();
 
 }//PPDef
 
@@ -487,6 +492,17 @@ class PPFun extends PPDef {
         this.code = code;
         this.ret = ret;
     }//PPFun
+    
+    UPPDef toUPP(){
+        ArrayList<String> arguments=new ArrayList<String>();
+        ArrayList<String> locales=new ArrayList<String>();
+        ArrayList<String> all=new ArrayList<String>();
+        for(Pair<String,Type> a : args)
+            arguments.add(a.left);
+        for(Pair<String,Type> e : locals)
+            locales.add(e.left);
+        return new UPPFun(name,arguments,locales,code.toUPP());
+    }//toUPP
 
 }//PPFun
 
@@ -499,6 +515,16 @@ class PPProc extends PPDef {
         this.locals = locals;
         this.code = code;
     }//PPProc
+    
+     UPPDef toUPP(){
+        ArrayList<String> arguments=new ArrayList<String>();
+        ArrayList<String> locales=new ArrayList<String>();
+        for(Pair<String,Type> a : args)
+            arguments.add(a.left);
+        for(Pair<String,Type> e : locals)
+            locales.add(e.left);
+        return new UPPProc(name,arguments,locales,code.toUPP());
+    }
 
 }//PPProc
 
@@ -518,5 +544,16 @@ class PPProg {
         this.defs = defs;
         this.code = code;
     }//PPProg
+    
+    UPPProg toUPP(){
+        ArrayList<String> globales=new ArrayList<String>();
+        ArrayList<UPPDef> defs=new ArrayList<UPPDef>();
+        for(Pair<String,Type> e : globals)
+            globales.add(e.left);
+        for(PPDef d : defs)
+            defs.add(d.toUPP());
+            ncode = code.toUPP(new ArrayList<String>());
+            return new UPPProg(globales,defs,code.toUPP());      
+    }
 
 }//PPProg
