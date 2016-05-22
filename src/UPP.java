@@ -6,7 +6,9 @@ import java.util.*;
 /* Arithmetic and boolean expressions */
 /**************************************/
 
-abstract class UPPExpr {}//UPPExpr
+abstract class UPPExpr {
+    
+}//UPPExpr
 
 class UPPCte extends UPPExpr {
 
@@ -15,6 +17,10 @@ class UPPCte extends UPPExpr {
     UPPCte (int val) {
         this.val = val;
     }//UPPCte
+    
+    public String toString(){
+        return "UPPCte : val = "+val;
+    }
 
 }//UPPCte
 
@@ -29,6 +35,10 @@ class UPPVar extends UPPExpr {
     UPPVar (String name) {
         this.name = name;
     }//UPPVar
+    
+    public String toString(){
+        return "UPPVar : name = "+name;
+    }
 
 }//UPPVar
 
@@ -39,6 +49,10 @@ class UPPGVar extends UPPExpr {
     UPPGVar (String name) {
         this.name = name;
     }//UPPGVar
+    
+    public String toString(){
+        return "UPPGVar : name = "+name;
+    }
 
 }//UPPGVar
 
@@ -54,6 +68,10 @@ class UPPNot extends UPPUnOp {
     UPPNot (UPPExpr e) {
         this.e = e;
     }//UPPNot
+    
+    public String toString(){
+        return "UPPNot declared";
+    }
 
 }//UPPNot
 
@@ -69,6 +87,10 @@ class UPPAdd extends UPPBinOp {
         this.e1 = e1;
         this.e2 = e2;
     }//UPPAdd
+    
+    public String toString(){
+        return "UPPAdd declared";
+    }
 
 }//UPPAd
 
@@ -78,6 +100,10 @@ class UPPSub extends UPPBinOp {
         this.e1 = e1;
         this.e2 = e2;
     }//UPPSub
+    
+    public String toString(){
+        return "UPPSub declared";
+    }
 
 }//UPPSub
 
@@ -87,6 +113,10 @@ class UPPMul extends UPPBinOp {
         this.e1 = e1;
         this.e2 = e2;
     }//UPPMul
+    
+    public String toString(){
+        return "UPPMul declared";
+    }
 
 }//UPPMul
 
@@ -96,6 +126,10 @@ class UPPDiv extends UPPBinOp {
         this.e1 = e1;
         this.e2 = e2;
     }//UPPDiv
+    
+    public String toString(){
+        return "UPPDiv declared";
+    }
 
 }//UPPDiv
 
@@ -105,6 +139,10 @@ class UPPAnd extends UPPBinOp {
         this.e1 = e1;
         this.e2 = e2;
     }//UPPAnd
+    
+    public String toString(){
+        return "UPPAnd declared";
+    }
 
 }//UPPAnd
 
@@ -114,6 +152,10 @@ class UPPOr extends UPPBinOp {
         this.e1 = e1;
         this.e2 = e2;
     }//UPPOr
+    
+    public String toString(){
+        return "UPPOr declared";
+    }
 
 }//UPPOr
 
@@ -123,6 +165,10 @@ class UPPLe extends UPPBinOp {
         this.e1 = e1;
         this.e2 = e2;
     }//UPPLe
+    
+    public String toString(){
+        return "UPPLe declared";
+    }
 
 }//UPPLe
 
@@ -132,6 +178,10 @@ class UPPLeq extends UPPBinOp {
         this.e1 = e1;
         this.e2 = e2;
     }//UPPLeq
+    
+    public String toString(){
+        return "UPPLeq declared";
+    }
 
 }//UPPLeq
 
@@ -141,6 +191,10 @@ class UPPEq extends UPPBinOp {
         this.e1 = e1;
         this.e2 = e2;
     }//UPPEq
+    
+    public String toString(){
+        return "UPPEq declared";
+    }
 
 }//UPPEq
 
@@ -150,6 +204,10 @@ class UPPNeq extends UPPBinOp {
         this.e1 = e1;
         this.e2 = e2;
     }//UPPNeq
+    
+    public String toString(){
+        return "UPPNeq declared";
+    }
 
 }//UPPNeq
 
@@ -159,6 +217,10 @@ class UPPGeq extends UPPBinOp {
         this.e1 = e1;
         this.e2 = e2;
     }//UPPGeq
+    
+    public String toString(){
+        return "UPPGeq declared";
+    }
 
 }//UPPGeq
 
@@ -168,14 +230,35 @@ class UPPGe extends UPPBinOp {
         this.e1 = e1;
         this.e2 = e2;
     }//UPPGe
+    
+    public String toString(){
+        return "UPPGe declared";
+    }
 
 }//UPPGe
 
-abstract class Callee {}//Callee
+abstract class Callee {
+    
+    public String toString(){
+        return "Callee declared";
+    }
+}
 
-class Read extends Callee {}//Read
+//Callee
 
-class Write extends Callee {}//Write
+class Read extends Callee {
+    
+    public String toString(){
+        return "Call Read function";
+    }
+}//Read
+
+class Write extends Callee {
+    
+    public String toString(){
+        return "Call Write function";
+    }
+}//Write
 
 class User extends Callee {
 
@@ -184,10 +267,19 @@ class User extends Callee {
     User (String name) {
         this.name = name;
     }//User
+    
+    public String toString(){
+        return "User : name ->"+name;
+    }
 
 }//User
 
-class Alloc extends Callee {}//Alloc
+class Alloc extends Callee {
+    
+    public String toString(){
+        return "Alloc function called";
+    }
+}//Alloc
 
 class UPPFunCall extends UPPExpr {
 
@@ -197,7 +289,12 @@ class UPPFunCall extends UPPExpr {
     UPPFunCall (Callee callee, ArrayList<UPPExpr> args) {
         this.callee = callee;
         this.args = args;
+             
     }//FunCall
+    
+    public String toString(){
+            return "UPPFunCall with callee : "+callee+" and arguments : "+args;
+        }
 
 }//FunCall
 
@@ -208,6 +305,10 @@ class UPPLoad extends UPPExpr {
     UPPLoad (UPPExpr addr) {
         this.addr = addr;
     }//UPPLoad
+    
+    public String toString(){
+        return "UPPLoad called";
+    }
 
 }//UPPLoad
 
@@ -226,6 +327,10 @@ class UPPAssign extends UPPInst {
         this.name = name;
         this.val = val;
     }//UPPAssign
+    
+    public String toString(){
+        return "UPPAssign with name : "+name+" and val : "+val;
+    }
 
 }//UPPAssign
 
@@ -237,6 +342,10 @@ class UPPStore extends UPPInst {
         this.addr = addr;
         this.val = val;
     }//UPPStore
+    
+    public String toString(){
+        return "UPPStore with addr : "+addr+" and val : "+val;
+    }
 
 }//UPPStore
 
@@ -250,6 +359,10 @@ class UPPCond extends UPPInst {
         this.i1 = i1;
         this.i2 = i2;
     }//UPPCond
+    
+    public String toString(){
+        return "UPPCond with condition : "+cond+" then instruction : "+i1+" else instruction : "+i2;
+    }
 
 }//UPPCond
 
@@ -262,6 +375,10 @@ class UPPWhile extends UPPInst {
         this.cond = cond;
         this.i = i;
     }//UPPWhile
+    
+    public String toString(){
+        return "UPPWhile with condition : "+cond+" and while instruction : "+i;
+    }
 
 }//UPPWhile
 
@@ -274,10 +391,19 @@ class UPPProcCall extends UPPInst {
         this.callee = callee;
         this.args = args;
     }//UPPProcCall
+    
+    public String toString(){
+        return "UPPProcCall with callee : "+callee+" and arguments : "+args;
+    }
 
 }//UPPProcCall
     
-class UPPSkip extends UPPInst {}//UPPSkip
+class UPPSkip extends UPPInst {
+    
+    public String toString(){
+        return "UPPSkip";
+    }
+}//UPPSkip
 
 class UPPSeq extends UPPInst {
 
@@ -287,6 +413,10 @@ class UPPSeq extends UPPInst {
         this.i1 = i1;
         this.i2 = i2;
     }//UPPSeq
+    
+    public String toString(){
+        return "UPPSeq i1 : "+i1+", i2 : "+i2;
+    }
 
 }//UPPSeq
 
@@ -327,6 +457,10 @@ class UPPFun extends UPPDef {
         this.locals = locals;
         this.code = code;
     }//UPPFun
+    
+    public String toString(){
+        return "UPPFun, name : "+name+" args : "+args+" locals : "+locals+" code : "+code;
+    }
 
 }//UPPFun
 
@@ -339,6 +473,10 @@ class UPPProc extends UPPDef {
         this.locals = locals;
         this.code = code;
     }//UPPProc
+    
+    public String toString(){
+        return "UPPProc, name : "+name+" args : "+args+" locals : "+locals+" code : "+code;
+    }
 
 }//UPPProc
 
@@ -357,5 +495,9 @@ class UPPProg {
         this.defs = defs;
         this.code = code;
     }//UPPProg
+    
+    public String toString(){
+        return "UPPProg with globals : "+globals+", definitions : "+defs+" code : "+code;
+    }
 
 }//UPPProg
