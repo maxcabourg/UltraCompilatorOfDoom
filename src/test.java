@@ -53,6 +53,11 @@ public class test {
 		System.out.println(program);
 		UPPProg programUPP = program.toUPP();
 		System.out.println(programUPP);
+		
+		PPInv inversion = new PPInv(new PPCte(4));
+		System.out.println(inversion);
+		
+		System.out.println(inversion.toUPP(null));
 	}
 
 }

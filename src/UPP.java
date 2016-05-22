@@ -70,7 +70,7 @@ class UPPNot extends UPPUnOp {
     }//UPPNot
     
     public String toString(){
-        return "UPPNot declared";
+        return "UPPNot :"+e.toString();
     }
 
 }//UPPNot
@@ -89,7 +89,7 @@ class UPPAdd extends UPPBinOp {
     }//UPPAdd
     
     public String toString(){
-        return "UPPAdd declared";
+        return "UPPAdd :"+e1.toString()+" + "+e2.toString();
     }
 
 }//UPPAd
@@ -102,7 +102,7 @@ class UPPSub extends UPPBinOp {
     }//UPPSub
     
     public String toString(){
-        return "UPPSub declared";
+        return "UPPSub :"+e1.toString()+" - "+e2.toString();
     }
 
 }//UPPSub
@@ -115,7 +115,7 @@ class UPPMul extends UPPBinOp {
     }//UPPMul
     
     public String toString(){
-        return "UPPMul declared";
+        return "UPPMul :"+e1.toString()+" * "+e2.toString();
     }
 
 }//UPPMul
@@ -128,7 +128,7 @@ class UPPDiv extends UPPBinOp {
     }//UPPDiv
     
     public String toString(){
-        return "UPPDiv declared";
+        return "UPPDiv :"+e1.toString()+" / "+e2.toString();
     }
 
 }//UPPDiv
@@ -141,7 +141,7 @@ class UPPAnd extends UPPBinOp {
     }//UPPAnd
     
     public String toString(){
-        return "UPPAnd declared";
+        return "UPPAnd: "+e1.toString()+" && "+e2.toString();
     }
 
 }//UPPAnd
@@ -154,7 +154,7 @@ class UPPOr extends UPPBinOp {
     }//UPPOr
     
     public String toString(){
-        return "UPPOr declared";
+        return "UPPOr "+e1.toString()+" || "+e2.toString();
     }
 
 }//UPPOr
@@ -167,7 +167,7 @@ class UPPLe extends UPPBinOp {
     }//UPPLe
     
     public String toString(){
-        return "UPPLe declared";
+        return "UPPLe "+e1.toString()+" < "+e2.toString();
     }
 
 }//UPPLe
@@ -180,7 +180,7 @@ class UPPLeq extends UPPBinOp {
     }//UPPLeq
     
     public String toString(){
-        return "UPPLeq declared";
+        return "UPPLeq "+e1.toString()+" <= "+e2.toString();
     }
 
 }//UPPLeq
@@ -193,7 +193,7 @@ class UPPEq extends UPPBinOp {
     }//UPPEq
     
     public String toString(){
-        return "UPPEq declared";
+        return "UPPEq "+e1.toString()+" == "+e2.toString();
     }
 
 }//UPPEq
@@ -206,7 +206,7 @@ class UPPNeq extends UPPBinOp {
     }//UPPNeq
     
     public String toString(){
-        return "UPPNeq declared";
+        return "UPPNeq "+e1.toString()+" != "+e2.toString();
     }
 
 }//UPPNeq
@@ -219,7 +219,7 @@ class UPPGeq extends UPPBinOp {
     }//UPPGeq
     
     public String toString(){
-        return "UPPGeq declared";
+        return "UPPGeq "+e1.toString()+" >= "+e2.toString();
     }
 
 }//UPPGeq
@@ -232,7 +232,7 @@ class UPPGe extends UPPBinOp {
     }//UPPGe
     
     public String toString(){
-        return "UPPGe declared";
+        return "UPPGe "+e1.toString()+" > "+e2.toString();
     }
 
 }//UPPGe
