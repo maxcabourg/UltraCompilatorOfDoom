@@ -714,7 +714,7 @@ class PPProg {
 		for(PPDef ppe:defs){
 			argDefs += ppe.toString();
 		}
-		return new String("PPProg: (variable global: "+argGlobal+", argDef-->: "+argDefs.toString()+", code -->: "+code.toString()+" )");
+		return new String("PPProg: (variable global: "+argGlobal.toString()+", argDef-->: "+argDefs.toString()+", code -->: "+code.toString()+" )");
 	}
 
 }//PPProg
