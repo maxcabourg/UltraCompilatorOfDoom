@@ -297,7 +297,11 @@ class PPFunCall extends PPExpr {
     }//FunCall
     
     UPPExpr toUPP(ArrayList<String> locals){
-    	return new UPPFunCall(callee, args);
+    	ArrayList<UPPExpr> list = new ArrayList<UPPExpr>();
+    	for(PPExpr expr: args){
+    		list.add(expr.toUPP(locals));
+    	}
+    	return new UPPFunCall(callee, list);
     }
 
 }//FunCall
