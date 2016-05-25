@@ -37,10 +37,10 @@ class UPPCte extends UPPExpr {
 
 class UPPTrue extends UPPExpr {
 
-	//TODO
+	
     RTLInst toRTL (ArrayList<Pair<String,PRegister>> locals,
                    ArrayList<String> globals, PRegister reg, RTLInst succ) {
-        
+        return new RTLCte(reg,1,succ);
     }//toRTL
 
 }//UPPTrue
@@ -49,7 +49,7 @@ class UPPFalse extends UPPExpr {
 
     RTLInst toRTL (ArrayList<Pair<String,PRegister>> locals,
                    ArrayList<String> globals, PRegister reg, RTLInst succ) {
-        //To do
+    	 return new RTLCte(reg,0,succ);
     }//toRTL
 
 }//UPPFalse
@@ -86,7 +86,7 @@ class UPPGVar extends UPPExpr {
 
     RTLInst toRTL (ArrayList<Pair<String,PRegister>> locals,
                    ArrayList<String> globals, PRegister reg, RTLInst succ) {
-        //To do
+    	 return new RTLSetGVar(name,reg,succ);
     }//toRTL
 
 }//UPPGVar
@@ -105,7 +105,10 @@ class UPPNot extends UPPUnOp {
 
     RTLInst toRTL (ArrayList<Pair<String,PRegister>> locals,
                    ArrayList<String> globals, PRegister reg, RTLInst succ) {
-        //To do
+    	PRegister registreE = e.getPRegister(locals);
+    	RTLInst xori = new RTLXOri(registreE,reg,succ);
+    	RTLInst ne2 = e.toRTL(locals,globals,registreE,xori);
+        return e.toRTL(locals, globals, registreE,succ);
     }//toRTL
 
 }//UPPNot
@@ -197,7 +200,10 @@ class UPPAnd extends UPPBinOp {
 
     RTLInst toRTL (ArrayList<Pair<String,PRegister>> locals,
                    ArrayList<String> globals, PRegister reg, RTLInst succ) {
-        //To do
+    	PRegister registre1 = e1.getPRegister(locals);
+    	PRegister registre2 = e2.getPRegister(locals);
+    	
+       //return new RTLAnd(registre1,registre2,reg,succ);
     }//toRTL
 
 }//UPPAnd
