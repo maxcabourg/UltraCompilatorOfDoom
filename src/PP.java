@@ -338,25 +338,7 @@ class PPGe extends PPBinOp {
 
 }//PPGe
 
-abstract class Callee {}//Callee
 
-class Read extends Callee {}//Read
-
-class Write extends Callee {}//Write
-
-class User extends Callee {
-
-	String name;
-
-	User (String name) {
-		this.name = name;
-	}//User
-	
-	public String toString(){
-		return new String("User: "+name);
-	}
-
-}//User
 
 class PPFunCall extends PPExpr {
 
@@ -582,25 +564,6 @@ class PPSeq extends PPInst {
 /* Definitions of functions/procedures */
 /***************************************/
 
-class Pair<L,R> {
-
-	final L left;
-	final R right;
-
-	public Pair(L left, R right) {
-		this.left = left;
-		this.right = right;
-	}//Pair
-
-	static <L,R> Pair<L,R> of(L left, R right){
-		return new Pair<L,R>(left, right);
-	}//of
-	
-	public String toString(){
-		return new String("Pair: (left: "+left.toString()+", right: "+right.toString()+") ");
-	}
-
-}//Pair
 
 abstract class PPDef {
 
@@ -628,7 +591,6 @@ class PPFun extends PPDef {
 	UPPDef toUPP(){
 		ArrayList<String> arguments=new ArrayList<String>();
 		ArrayList<String> locales=new ArrayList<String>();
-		ArrayList<String> all=new ArrayList<String>();
 		for(Pair<String,Type> a : args)
 			arguments.add(a.left);
 		for(Pair<String,Type> e : locals)
