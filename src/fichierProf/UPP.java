@@ -107,8 +107,7 @@ class UPPNot extends UPPUnOp {
                    ArrayList<String> globals, PRegister reg, RTLInst succ) {
     	PRegister registreE = e.getPRegister(locals);
     	RTLInst xori = new RTLXOri(registreE,reg,succ);
-    	RTLInst ne2 = e.toRTL(locals,globals,registreE,xori);
-        return e.toRTL(locals, globals, registreE,succ);
+    	//return xori; Vraiment pas sur de ça
     }//toRTL
 
 }//UPPNot
@@ -203,7 +202,9 @@ class UPPAnd extends UPPBinOp {
     	PRegister registre1 = e1.getPRegister(locals);
     	PRegister registre2 = e2.getPRegister(locals);
     	
-       //return new RTLAnd(registre1,registre2,reg,succ);
+         RTLInst and = new RTLMul(registre1,registre2,reg,succ);
+         RTLInst ne2 = e2.toRTL(locals,globals,registre2,and);
+         return e1.toRTL(locals,globals,registre1,ne2);
     }//toRTL
 
 }//UPPAnd
