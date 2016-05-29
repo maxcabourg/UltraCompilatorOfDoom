@@ -107,7 +107,7 @@ class UPPNot extends UPPUnOp {
                    ArrayList<String> globals, PRegister reg, RTLInst succ) {
     	PRegister registreE = e.getPRegister(locals);
     	RTLInst xori = new RTLXOri(registreE,reg,succ);
-    	//return xori; Vraiment pas sur de ça
+    	//return xori; Vraiment pas sur de ï¿½a
     }//toRTL
 
 }//UPPNot
@@ -218,6 +218,13 @@ class UPPOr extends UPPBinOp {
 
     RTLInst toRTL (ArrayList<Pair<String,PRegister>> locals,
                    ArrayList<String> globals, PRegister reg, RTLInst succ) {
+                       
+        ArrayList<String> globals, PRegister reg, RTLInst succ) {
+        PRegister regE1 = e1.getPRegister(locals);
+        PRegister regE2 = e2.getPRegister(locals);
+        RTLInst or = new RTLOr(regE1,regE2,reg,succ);
+        RTLInst ne = e2.toRTL(locals,globals,regE2,or);
+        return e1.toRTL(locals,globals,regE1,ne);
         //To do
     }//toRTL
 
@@ -379,6 +386,10 @@ class UPPLoad extends UPPExpr {
 
     RTLInst toRTL (ArrayList<Pair<String,PRegister>> locals,
                    ArrayList<String> globals, PRegister reg, RTLInst succ) {
+                       
+        PRegister regAddr = addr.getPRegister(locals); //Recupere le pseudo registre
+        RTLInst load = new RTLLoad(regAddr,reg,succ);
+        return addr.toRTL(locals,globals,regAddr,load);
         //To do
     }//toRTL
 
@@ -461,7 +472,12 @@ class UPPCond extends UPPInst {
 
     RTLInst toRTL (ArrayList<Pair<String,PRegister>> locals,
                    ArrayList<String> globals, RTLInst succ) {
-        //To do
+        PRegister regCond = cond.getPRegister(locals);
+        RTLInst ni1 = i1.toRTL(locals,globals,succ);
+        RTLInst ni2 = i2.toRTL(locals,globals,succ); //Recuperation des pseudo registres
+        RTLGtz gtz = new RTLGtz(regCond,ni1,ni2); //Greater than zero
+        RTLInst ncond = cond.toRTL(locals,globals,regCond,gtz);
+        return ncond;
     }//toRTL
 
 }//UPPCond
