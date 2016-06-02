@@ -81,6 +81,7 @@ public class Graph {
 		for(Vertex v:this.vertices){
 			if(v != remove){
 				list.add(v);
+				v.getInterference().remove(remove);
 			}
 		}
 		return list;
