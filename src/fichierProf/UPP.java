@@ -1,6 +1,8 @@
 package fichierProf;
 
-// UPP.java
+/**
+ * @author Cabourg Max & Masson Yoann (& Merci M le professeur aussi)
+ */
 
 import java.util.*;
 
