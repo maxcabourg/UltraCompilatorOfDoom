@@ -12,6 +12,8 @@ public class Vertex {
 
 	private List<Vertex> interference ;
 	private List<Vertex> preference ;
+	private List<Vertex> interferenceWork ;
+	private List<Vertex> preferenceWork ;
 	private char label;
 	private String color ="Pas de couleur";
 
@@ -19,6 +21,8 @@ public class Vertex {
 		this.label = label;
 		interference = new ArrayList<Vertex>();
 		preference = new ArrayList<Vertex>();
+		interferenceWork = new ArrayList<Vertex>();
+		preferenceWork = new ArrayList<Vertex>();
 	}
 
 	/**
@@ -28,18 +32,22 @@ public class Vertex {
 	 */
 	public void addEdge(Vertex dest,boolean interference) {
 		if(interference){
-			this.interference.add(dest);	
+			this.interference.add(dest);
+			this.interferenceWork.add(dest);
 		}else{
 			this.preference.add(dest);
+			this.preferenceWork.add(dest);
 		}
 		dest.addEdgeFinal(this, interference);
 	}
 
 	private void addEdgeFinal(Vertex dest, boolean interference) {
 		if(interference){
-			this.interference.add(dest);	
+			this.interference.add(dest);
+			this.interferenceWork.add(dest);
 		}else{
 			this.preference.add(dest);
+			this.preferenceWork.add(dest);
 		}
 	}
 
@@ -48,7 +56,17 @@ public class Vertex {
 	 * @return the vertex's degree
 	 */
 	public int degree(){
-		return interference.size();
+		return interferenceWork.size();
+	}
+	
+	/**
+	 * Make the work list right again
+	 */
+	public void reInitialiseWork(){
+		this.interferenceWork = new ArrayList<Vertex>();
+		for(Vertex v:this.interference){
+			interferenceWork.add(v);
+		}
 	}
 
 	/**
@@ -66,6 +84,14 @@ public class Vertex {
 	 */
 	public List<Vertex> getInterference() {
 		return interference;
+	}
+	
+	/**
+	 * Get the interference list of the vertex
+	 * @return List of vertices
+	 */
+	public List<Vertex> getInterferenceWork() {
+		return interferenceWork;
 	}
 
 	/**

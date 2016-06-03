@@ -81,7 +81,7 @@ public class Graph {
 		for(Vertex v:this.vertices){
 			if(v != remove){
 				list.add(v);
-				v.getInterference().remove(remove);
+				v.getInterferenceWork().remove(remove);
 			}
 		}
 		return list;
@@ -92,21 +92,23 @@ public class Graph {
 	 * @param k number of available register
 	 */
 	public void color(int k) {
-		if(this.vertices.size() > 0){//Le graphe n'est pas vide, sinon on s'arrête
+		if(this.vertices.size() > 0){//Le graphe n'est pas vide, sinon on s'arrï¿½te
 			Vertex kColoriable = this.getKColoriable(k);
 			if(kColoriable != null){
-				Graph G_s = new Graph();// Construction G privé de S
+				Graph G_s = new Graph();// Construction G privï¿½ de S
 				List<Vertex> listeTemp = this.removeVertex(kColoriable);
 				G_s.setVertices(listeTemp);
-				G_s.color(k);//Récursivité
+				G_s.color(k);//Rï¿½cursivitï¿½
 				kColoriable.setColor();//Attribution de la couleur au sommet k coloriable
+				kColoriable.reInitialiseWork();
 			}else{
 				Vertex spill = getHighestDegree();
-				Graph G_s = new Graph();// Construction G privé de S
+				Graph G_s = new Graph();// Construction G privï¿½ de S
 				List<Vertex> listeTemp = this.removeVertex(spill);
 				G_s.setVertices(listeTemp);
 				G_s.color(k);
 				spill.spill();
+				spill.reInitialiseWork();
 			}
 		}
 

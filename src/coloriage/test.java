@@ -20,7 +20,7 @@ public class test {
 		d = new Vertex('d');
 		Graph g = new Graph();
 		
-		//Ajout des arrêtes
+		//Ajout des arrï¿½tes
 		a.addEdge(b,true);
 		b.addEdge(c,true);
 		c.addEdge(d, true);
