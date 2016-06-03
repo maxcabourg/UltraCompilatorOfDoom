@@ -39,7 +39,7 @@ public class test {
 		g.addVertex(y);
 		g.addVertex(z);
 		
-		g.color(2);
+		g.color(1);
 		System.out.println(g);
 
 	}

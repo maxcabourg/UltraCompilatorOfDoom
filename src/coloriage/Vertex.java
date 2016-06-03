@@ -104,7 +104,7 @@ public class Vertex {
 
 	public void setColor(){
 		boolean available;
-		for(int i = 0; i< 10 ;i++){// On choisit une couleur dispo
+		for(int i = 0; i< 10 ;i++){// On choisit une couleur, et on vérifie si elle est dispo
 			available = true;
 			String color = Graph.tabColor[i];
 			for(Vertex v:this.interference){
@@ -116,18 +116,19 @@ public class Vertex {
 				this.color = color;
 				break;
 			}
+			
 		}
 		//On regarde si on ne pourrait pas prendre une couleur de prÃ©fÃ©rence
-		for(Vertex v:this.preference){
-			if(v.color != null && !v.color.equals("spill")){//On a bien une couleur Ã  attribuer
+		for(Vertex vertexPreference:this.preference){
+			if(!vertexPreference.color.equals("Pas de couleur") && !vertexPreference.color.equals("spill")){//On a bien une couleur à  attribuer
 				available = true;
-				for(Vertex vv:this.interference){
-					if(vv.color.equals(v.color)){
+				for(Vertex vertexInterference:this.interference){
+					if(vertexInterference.color.equals(vertexPreference.color)){
 						available = false;
 					}
 				}
 				if(available){
-					this.color = v.color;
+					this.color = vertexPreference.color;
 					break;
 				}
 			}
