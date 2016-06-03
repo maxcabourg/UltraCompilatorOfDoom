@@ -58,7 +58,7 @@ public class Vertex {
 	public int degree(){
 		return interferenceWork.size();
 	}
-	
+
 	/**
 	 * Make the work list right again
 	 */
@@ -85,7 +85,7 @@ public class Vertex {
 	public List<Vertex> getInterference() {
 		return interference;
 	}
-	
+
 	/**
 	 * Get the interference list of the vertex
 	 * @return List of vertices
@@ -104,7 +104,7 @@ public class Vertex {
 
 	public void setColor(){
 		boolean available;
-		for(int i = 0; i< 10 ;i++){
+		for(int i = 0; i< 10 ;i++){// On choisit une couleur dispo
 			available = true;
 			String color = Graph.tabColor[i];
 			for(Vertex v:this.interference){
@@ -117,8 +117,23 @@ public class Vertex {
 				break;
 			}
 		}
+		//On regarde si on ne pourrait pas prendre une couleur de préférence
+		for(Vertex v:this.preference){
+			if(v.color != null && !v.color.equals("spill")){//On a bien une couleur à attribuer
+				available = true;
+				for(Vertex vv:this.interference){
+					if(vv.color.equals(v.color)){
+						available = false;
+					}
+				}
+				if(available){
+					this.color = v.color;
+					break;
+				}
+			}
+		}
 	}
-	
+
 	public void spill(){
 		this.color=new String("Spill");
 	}
