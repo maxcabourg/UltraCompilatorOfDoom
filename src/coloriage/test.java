@@ -11,7 +11,7 @@ import java.awt.Color;
 public class test {
 
 	public static void main(String[] args) {
-		
+
 		//Initialisation du graph
 		Vertex t,u,v,x,y,z ;
 		t = new Vertex('t');
@@ -21,7 +21,7 @@ public class test {
 		y = new Vertex('y');
 		z = new Vertex('z');
 		Graph g = new Graph();
-		
+
 		//Ajout des arr�tes
 		z.addEdge(v,true);
 		v.addEdge(t,true);
@@ -31,6 +31,7 @@ public class test {
 		x.addEdge(u,true);
 		y.addEdge(u,true);
 		u.addEdge(t, false);
+
 		//Ajout des sommets dans le graph
 		g.addVertex(t);
 		g.addVertex(u);
@@ -38,10 +39,14 @@ public class test {
 		g.addVertex(x);
 		g.addVertex(y);
 		g.addVertex(z);
-		
-		g.color(1);
+
+		System.out.println("////////////////////////////////Graphe de la diapo 10 du cours 7 avec k=3/////////////////////////////////////////////");
+		g.color(3);
 		System.out.println(g);
 
+		System.out.println("////////////////////////////////Graphe de la diapo 10 du cours 7 avec k=2/////////////////////////////////////////////");
+		g.color(2);
+		System.out.println(g);
 	}
 
 }
