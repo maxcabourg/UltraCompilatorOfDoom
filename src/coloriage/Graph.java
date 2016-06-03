@@ -98,17 +98,17 @@ public class Graph {
 				Graph G_s = new Graph();// Construction G privï¿½ de S
 				List<Vertex> listeTemp = this.removeVertex(kColoriable);
 				G_s.setVertices(listeTemp);
-				G_s.color(k);//Rï¿½cursivitï¿½
+				G_s.color(k);//Récursivité
 				kColoriable.setColor();//Attribution de la couleur au sommet k coloriable
 				kColoriable.reInitialiseWork();
 			}else{
 				Vertex spill = getHighestDegree();
-				Graph G_s = new Graph();// Construction G privï¿½ de S
+				Graph G_s = new Graph();// Construction G privé de S
 				List<Vertex> listeTemp = this.removeVertex(spill);
 				G_s.setVertices(listeTemp);
-				G_s.color(k);
-				spill.spill();
-				spill.reInitialiseWork();
+				G_s.color(k);//Récursivité
+				spill.spill();//On attribue spill
+				spill.reInitialiseWork();//On reconstruit le graph
 			}
 		}
 

@@ -25,9 +25,9 @@ public class test {
 		//Ajout des arr�tes
 		z.addEdge(v,true);
 		v.addEdge(t,true);
+		v.addEdge(x,true);
 		t.addEdge(y,true);
 		y.addEdge(x,true);
-		z.addEdge(v,true);
 		x.addEdge(u,true);
 		y.addEdge(u,true);
 		u.addEdge(t, false);
@@ -39,7 +39,7 @@ public class test {
 		g.addVertex(y);
 		g.addVertex(z);
 		
-		g.color(1);
+		g.color(2);
 		System.out.println(g);
 
 	}
