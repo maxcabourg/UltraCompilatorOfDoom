@@ -16,24 +16,36 @@ public class fibonacci {
 		System.out.println(fibRecursif(8)+" : 21 recursif");
 		System.out.println(fibIteratif(16)+" : 987 iteratif");
 		System.out.println(fibRecursif(16)+" : 987 recursif");
+		System.out.println(fibRecursifTerminal(0,0,1)+" : 0 recursif terminal");
+		System.out.println(fibRecursifTerminal(1,0,1)+" : 1 recursif terminal");
+		System.out.println(fibRecursifTerminal(2,0,1)+" : 1 recursif terminal");
+		System.out.println(fibRecursifTerminal(5,0,1)+" : 5 recursif terminal");
+		System.out.println(fibRecursifTerminal(8,0,1)+" : 21 recursif terminal");
+		System.out.println(fibRecursifTerminal(16,0,1)+" : 987 recursif terminal");
 	}
 
 
 	public static int fibIteratif(int n){
-		int i,i_1,i_2,z;
-		i=n;
+		int z,i_1,i_2;
 		i_1=1;
 		i_2=0;
-		if(i>1){
-			for(i=2;i<=n;i++){
-				z = i;
-				i = i_1+i_2;
-				i_2 = i_1;
-				i_1 = z;
+		if(n>1){
+			for(int i=2;i<=n;i++){
+				z = i_1;
+				i_1=i_1+i_2;
+				i_2 = z;
 				
 			}
 		}
-		return i;
+		return i_1;
+	}
+	
+	public static int fibRecursifTerminal(int n,int acc0,int acc1){
+		if(n == 0){
+			return acc0;
+		}else{
+			return fibRecursifTerminal(n-1,acc1,acc0+acc1);
+		}
 	}
 
 	public static int fibRecursif(int n){
