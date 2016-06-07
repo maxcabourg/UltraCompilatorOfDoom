@@ -102,11 +102,11 @@ public class Vertex {
 		return preference;
 	}
 
-	public void setColor(){
+	public void setColor(int k){
 		boolean available;
-		for(int i = 0; i< 10 ;i++){// On choisit une couleur, et on vérifie si elle est dispo
+		for(int i = 1; i<= k ;i++){// On choisit une couleur, et on vérifie si elle est dispo
 			available = true;
-			String color = Graph.tabColor[i];
+			String color = "-- c"+i;
 			for(Vertex v:this.interference){
 				if(v.color.equals(color)){
 					available = false;

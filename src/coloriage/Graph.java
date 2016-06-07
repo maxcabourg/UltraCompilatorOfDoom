@@ -11,8 +11,6 @@ import java.util.*;
 public class Graph {
 
 	private List<Vertex> vertices;
-	private static int compteur = 0;
-	public static String[] tabColor = {"Blue","Red","Green","Yellow","Purple","Orange","Pink","Black","White","Grey"};
 
 	public Graph(){
 		this.vertices = new ArrayList<Vertex>();
@@ -24,12 +22,6 @@ public class Graph {
 	 */
 	public void addVertex(Vertex a){
 		this.vertices.add(a);
-	}
-
-	public static String getColor(){
-		compteur++;
-		return tabColor[compteur-1];
-
 	}
 
 
@@ -99,7 +91,7 @@ public class Graph {
 				List<Vertex> listeTemp = this.removeVertex(kColoriable);
 				G_s.setVertices(listeTemp);
 				G_s.color(k);//Récursivité
-				kColoriable.setColor();//Attribution de la couleur au sommet k coloriable
+				kColoriable.setColor(k);//Attribution de la couleur au sommet k coloriable
 				kColoriable.reInitialiseWork();
 			}else{
 				Vertex spill = getHighestDegree();
